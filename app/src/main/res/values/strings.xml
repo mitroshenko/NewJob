@@ -1,0 +1,11 @@
+<resources>
+    <string name="app_name">NewJob</string>
+    <string name="title_search">Поиск</string>
+    <string name="title_responses">Отклики</string>
+    <string name="title_messages">Сообщения</string>
+    <string name="title_profile">Профиль</string>
+    <string name="title_favourites">Избранное</string>
+    <string name="btn_resume">Продолжить</string>
+    <string name="btn_pass">Войти с паролем</string>
+    <string name="confirm">Подтвердить</string>
+</resources>
