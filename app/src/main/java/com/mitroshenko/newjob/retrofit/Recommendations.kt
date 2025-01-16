@@ -1,7 +1,7 @@
 package com.mitroshenko.newjob.retrofit
 
 data class Recommendations(
-    val id: String,
+    var id: String,
     val title: String,
-    val link: String,
+    val link: String
 )
