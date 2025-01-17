@@ -11,7 +11,7 @@ import com.mitroshenko.newjob.databinding.RecomRcviewBinding
 import com.mitroshenko.newjob.retrofit.Recommendations
 import java.text.FieldPosition
 
-class RecommendationAdapter: ListAdapter<Recommendations, RecommendationAdapter.Holder>(Comporator()){
+class RecommendationAdapter: ListAdapter<Recommendations, RecommendationAdapter.Holder>(Comparator()){
     class Holder(view: View): RecyclerView.ViewHolder(view){
         private val binding = RecomRcviewBinding.bind(view)
 
@@ -19,13 +19,13 @@ class RecommendationAdapter: ListAdapter<Recommendations, RecommendationAdapter.
             tvRecTitle.text = recommendations.title
         }
     }
-    class Comporator: DiffUtil.ItemCallback<Recommendations>(){
+    class Comparator: DiffUtil.ItemCallback<Recommendations>(){
         override fun areItemsTheSame(oldItem: Recommendations, newItem: Recommendations): Boolean {
-            return oldItem.id = newItem.id
+            return oldItem.id == newItem.id
         }
 
         override fun areContentsTheSame(oldItem: Recommendations, newItem: Recommendations): Boolean {
-            return oldItem = newItem
+            return oldItem == newItem
         }
 
     }

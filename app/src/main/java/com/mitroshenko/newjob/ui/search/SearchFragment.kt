@@ -8,6 +8,7 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.RecyclerView.LayoutManager
 import com.mitroshenko.newjob.adapter.RecommendationAdapter
 import com.mitroshenko.newjob.databinding.FragmentSearchBinding
@@ -37,7 +38,7 @@ class SearchFragment : Fragment() {
 
         return root
 
-        binding.rcRecommendations.layoutManager = LinearLayoutManager(this, 0, false)
+        binding.rcRecommendations.layoutManager = LinearLayoutManager(this, RecyclerView.HORIZONTAL, false)
         binding.rcRecommendations.adapter = adapter
 
         val retrofit = Retrofit.Builder()
@@ -47,12 +48,13 @@ class SearchFragment : Fragment() {
 
         CoroutineScope(Dispatchers.IO).launch {
             val list = sf_Api.getAllRecommendation()
-            runOnUiThread() {
+            runOnUiThread {
                 binding.apply {
                     adapter.submitList(list.offers)
                 }
             }
         }
+
     }
 
     override fun onDestroyView() {
