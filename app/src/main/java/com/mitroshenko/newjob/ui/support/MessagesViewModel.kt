@@ -1,4 +1,4 @@
-package com.mitroshenko.newjob.ui.messages
+package com.mitroshenko.newjob.ui.support
 
 import androidx.lifecycle.ViewModel
 

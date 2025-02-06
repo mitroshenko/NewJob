@@ -1,4 +1,4 @@
-package com.mitroshenko.newjob.ui.messages
+package com.mitroshenko.newjob.ui.support
 
 import androidx.lifecycle.ViewModelProvider
 import android.os.Bundle
@@ -20,7 +20,7 @@ class MessagesFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        return inflater.inflate(R.layout.fragment_messages, container, false)
+        return inflater.inflate(R.layout.fragment_support, container, false)
     }
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {

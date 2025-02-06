@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/black"
+    android:background="@color/white"
     tools:context=".presentation.CodeActivity">
 
     <LinearLayout
@@ -24,7 +24,7 @@
             android:layout_width="match_parent"
             android:layout_height="30dp"
             android:text="TextView"
-            android:textColor="@color/white"
+            android:textColor="@color/black"
             android:textSize="20sp" />
 
         <TextView
@@ -34,7 +34,7 @@
             android:layout_marginTop="16dp"
             android:layout_weight="1"
             android:text="Напишите его, чтобы подтвердить, что это вы, а не кто-то другой входит в личный кабинет"
-            android:textColor="@color/white"
+            android:textColor="@color/black"
             android:textSize="16sp" />
 
         <LinearLayout
@@ -47,13 +47,13 @@
                 android:layout_width="48dp"
                 android:layout_height="48dp"
                 android:background="@drawable/ic_boxcode"
-                android:backgroundTint="#313234"
+                android:backgroundTint="#E5E5E6"
+                android:ems="10"
                 android:gravity="center"
+                android:inputType="number"
                 android:maxLength="1"
                 android:singleLine="true"
-                android:textColor="@color/white"
-                android:ems="10"
-                android:inputType="number" />
+                android:textColor="@color/black" />
 
 
             <EditText
@@ -63,26 +63,26 @@
                 android:layout_marginStart="6dp"
                 android:layout_marginEnd="6dp"
                 android:background="@drawable/ic_boxcode"
-                android:backgroundTint="#313234"
+                android:backgroundTint="#E5E5E6"
+                android:ems="10"
                 android:gravity="center"
+                android:inputType="number"
                 android:maxLength="1"
                 android:maxLines="1"
-                android:textColor="@color/white"
-                android:ems="10"
-                android:inputType="number" />
+                android:textColor="@color/black" />
 
             <EditText
                 android:id="@+id/ed_code3"
                 android:layout_width="48dp"
                 android:layout_height="48dp"
                 android:background="@drawable/ic_boxcode"
-                android:backgroundTint="#313234"
+                android:backgroundTint="#E5E5E6"
+                android:ems="10"
                 android:gravity="center"
+                android:inputType="number"
                 android:maxLength="1"
                 android:maxLines="1"
-                android:textColor="@color/white"
-                android:ems="10"
-                android:inputType="number" />
+                android:textColor="@color/black" />
 
             <EditText
                 android:id="@+id/ed_code4"
@@ -90,13 +90,13 @@
                 android:layout_height="48dp"
                 android:layout_marginStart="6dp"
                 android:background="@drawable/ic_boxcode"
-                android:backgroundTint="#313234"
+                android:backgroundTint="#E5E5E6"
+                android:ems="10"
                 android:gravity="center"
+                android:inputType="number"
                 android:maxLength="1"
                 android:maxLines="1"
-                android:textColor="@color/white"
-                android:ems="10"
-                android:inputType="number" />
+                android:textColor="@color/black" />
 
         </LinearLayout>
 

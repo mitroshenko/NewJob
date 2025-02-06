@@ -1,11 +1,14 @@
 <resources>
-    <string name="app_name">NewJob</string>
-    <string name="title_search">Поиск</string>
-    <string name="title_responses">Отклики</string>
-    <string name="title_messages">Сообщения</string>
-    <string name="title_profile">Профиль</string>
-    <string name="title_favourites">Избранное</string>
-    <string name="btn_resume">Продолжить</string>
+    <string name="app_name">IMStore</string>
+    <string name="title_search">Search</string>
+    <string name="title_responses">Basket</string>
+    <string name="title_messages">Support</string>
+    <string name="title_profile">Profile</string>
+    <string name="title_favourites">Favourites</string>
+    <string name="btn_sing_in">Sing in</string>
     <string name="btn_pass">Войти с паролем</string>
-    <string name="confirm">Подтвердить</string>
+    <string name="confirm">Confirm</string>
+    <string name="line"> Not crossed <strike> crossed </strike> </string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>

@@ -1,4 +1,4 @@
-package com.mitroshenko.newjob.ui.responses
+package com.mitroshenko.newjob.ui.basket
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -7,11 +7,12 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
-import com.mitroshenko.newjob.databinding.FragmentResponsesBinding
+import com.mitroshenko.newjob.databinding.FragmentBasketBinding
 
-class ResponsesFragment : Fragment() {
 
-    private var _binding: FragmentResponsesBinding? = null
+class BasketFragment : Fragment() {
+
+    private var _binding: FragmentBasketBinding? = null
 
     private val binding get() = _binding!!
 
@@ -21,9 +22,9 @@ class ResponsesFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View {
         val notificationsViewModel =
-            ViewModelProvider(this).get(ResponsesViewModel::class.java)
+            ViewModelProvider(this).get(BasketViewModel::class.java)
 
-        _binding = FragmentResponsesBinding.inflate(inflater, container, false)
+        _binding = FragmentBasketBinding.inflate(inflater, container, false)
         val root: View = binding.root
 
         val textView: TextView = binding.textResponses

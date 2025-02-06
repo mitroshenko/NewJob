@@ -4,11 +4,9 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.text.Editable
-import android.text.TextUtils
 import android.text.TextWatcher
 import android.widget.Button
 import android.widget.EditText
-import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.mitroshenko.newjob.R
 
 class StartActivity : AppCompatActivity() {
@@ -17,7 +15,7 @@ class StartActivity : AppCompatActivity() {
         setContentView(R.layout.activity_start)
 
         val email = findViewById<EditText>(R.id.ed_email)
-        val resume = findViewById<Button>(R.id.btn_resume)
+        val resume = findViewById<Button>(R.id.btn_sing_in)
 
             email.addTextChangedListener(object: TextWatcher{
                 override fun beforeTextChanged(
