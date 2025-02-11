@@ -1,10 +1,22 @@
 package com.mitroshenko.newjob.retrofit.reviews
 
-data class Review(
+data class ProductReviews(
+    val productReviews: List<ProductReviewsModel>
+//    val id: Int,
+//    val review: ReviewsModel
+)
+
+data class ProductReviewsModel(
     val id: Int,
-    val title: String
-//    val rating: Float,
-//    val comment: String,
-//    val date: String,
-//    val reviewerName: String
+    val rewiews: ReviewsModel
+    )
+
+//data class Reviews2(
+//    val reviews2: List<re>
+//)
+data class ReviewsModel(
+    val rating: Int,
+    val comment: String,
+    val date: String,
+    val reviewerName: String
 )

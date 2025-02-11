@@ -8,7 +8,4 @@ interface SF_Api {
     suspend fun getAllProducts(): Products
     @GET("products/search")
     suspend fun getProductsByName(@Query("q") name: String): Products
-
-//    @GET("products/{id}")
-//    suspend fun getProductById(): Product
 }

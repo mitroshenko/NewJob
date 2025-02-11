@@ -9,9 +9,11 @@ import androidx.navigation.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.mitroshenko.newjob.R
+import com.mitroshenko.newjob.adapter.ProductAdapter
 import com.mitroshenko.newjob.adapter.ReviewsAdapter
 import com.mitroshenko.newjob.databinding.FragmentBasketBinding
 import com.mitroshenko.newjob.databinding.FragmentProductCardBinding
+import com.mitroshenko.newjob.retrofit.product.Product
 import com.mitroshenko.newjob.retrofit.product.SF_Api
 import com.mitroshenko.newjob.retrofit.reviews.CF_Api
 import kotlinx.coroutines.CoroutineScope
@@ -24,7 +26,12 @@ import retrofit2.converter.gson.GsonConverterFactory
 
 class ProductCardFragment : Fragment() {
 
-    private var revAdapter = ReviewsAdapter()
+//    private val adapter: ProductAdapter by lazy {
+//        ProductAdapter { product ->
+//            view?.findNavController()!!
+//                .navigate(R.id.action_navigation_search_to_productCardFragment)
+//        }
+    private val adapter = ReviewsAdapter()
     private var _binding: FragmentProductCardBinding? = null
     private val binding get() = _binding!!
         override fun onCreateView(
@@ -34,7 +41,7 @@ class ProductCardFragment : Fragment() {
             _binding = FragmentProductCardBinding.inflate(inflater, container, false)
             val root: View = binding.root
             binding.rcReviews.layoutManager = LinearLayoutManager(context)
-            binding.rcReviews.adapter = revAdapter
+            binding.rcReviews.adapter = adapter
             binding.ibBack.setOnClickListener {
                 view?.findNavController()!!
                     .navigate(R.id.action_productCardFragment_to_navigation_search)
@@ -52,17 +59,25 @@ class ProductCardFragment : Fragment() {
                 .client(client2)
                 .addConverterFactory(GsonConverterFactory.create()).build()
             val cf_Api = retrofit.create(CF_Api::class.java)
+            val sf_Api = retrofit.create(SF_Api::class.java)
 
             CoroutineScope(Dispatchers.IO).launch {
-                val list = cf_Api.getCardById()
+                val list = cf_Api.getCardById(1)
                 activity?.runOnUiThread {
                     binding.apply {
-                        revAdapter.submitList(list.reviews)
+                        adapter.submitList(list.productReviews)
                     }
                 }
             }
             return root
     }
+//    fun add(products: Product) = with(binding) {
+//        tvPrice2.text = products.price.toString()
+//        tvRaiting.text = products.rating.toString()
+//        tvBrand.text = products.brand
+//        tvDescription.text = products.description
+//        tvTitle.text = products.title
+//    }
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
