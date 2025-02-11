@@ -8,7 +8,9 @@ import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.mitroshenko.newjob.R
 import com.mitroshenko.newjob.databinding.ReviewsRcviewBinding
-import com.mitroshenko.newjob.retrofit.reviews.ReviewsModel
+import com.mitroshenko.newjob.retrofit.product.Product
+import com.mitroshenko.newjob.retrofit.product.ReviewsModel
+
 
 class ReviewsAdapter: ListAdapter <ReviewsModel, ReviewsAdapter.Holder>(Comparator()){
     class Holder(view: View): RecyclerView.ViewHolder(view){

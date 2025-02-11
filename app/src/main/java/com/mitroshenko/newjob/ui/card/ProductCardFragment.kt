@@ -15,7 +15,6 @@ import com.mitroshenko.newjob.databinding.FragmentBasketBinding
 import com.mitroshenko.newjob.databinding.FragmentProductCardBinding
 import com.mitroshenko.newjob.retrofit.product.Product
 import com.mitroshenko.newjob.retrofit.product.SF_Api
-import com.mitroshenko.newjob.retrofit.reviews.CF_Api
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -31,7 +30,7 @@ class ProductCardFragment : Fragment() {
 //            view?.findNavController()!!
 //                .navigate(R.id.action_navigation_search_to_productCardFragment)
 //        }
-    private val adapter = ReviewsAdapter()
+    private val revadapter = ReviewsAdapter()
     private var _binding: FragmentProductCardBinding? = null
     private val binding get() = _binding!!
         override fun onCreateView(
@@ -41,7 +40,7 @@ class ProductCardFragment : Fragment() {
             _binding = FragmentProductCardBinding.inflate(inflater, container, false)
             val root: View = binding.root
             binding.rcReviews.layoutManager = LinearLayoutManager(context)
-            binding.rcReviews.adapter = adapter
+            binding.rcReviews.adapter = revadapter
             binding.ibBack.setOnClickListener {
                 view?.findNavController()!!
                     .navigate(R.id.action_productCardFragment_to_navigation_search)
@@ -58,14 +57,13 @@ class ProductCardFragment : Fragment() {
                 .baseUrl("https://dummyjson.com")
                 .client(client2)
                 .addConverterFactory(GsonConverterFactory.create()).build()
-            val cf_Api = retrofit.create(CF_Api::class.java)
             val sf_Api = retrofit.create(SF_Api::class.java)
 
             CoroutineScope(Dispatchers.IO).launch {
-                val list = cf_Api.getCardById(1)
+                val list = sf_Api.getCardById(1)
                 activity?.runOnUiThread {
                     binding.apply {
-                        adapter.submitList(list.productReviews)
+                        revadapter.submitList(list.reviews1)
                     }
                 }
             }
