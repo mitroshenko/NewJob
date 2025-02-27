@@ -19,7 +19,6 @@ class ProductAdapter(private val onClick: (Product) -> Unit): ListAdapter<Produc
             tvPrice.text = products.price.toString()
             tvBrand.text = products.brand
             tvRaiting.text = products.rating.toString()
-
         }
         companion object {
             fun create(parent: ViewGroup, onClick: (Product) -> Unit): Holder {

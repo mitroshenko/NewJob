@@ -10,10 +10,10 @@ data class Product(
     val brand: String,
     val discountPercentage: Float,
     val description: String,
-    val reviews: ReviewsModel
+    val reviews: List<Review>
 )
 
-data class ReviewsModel(
+data class Review(
     val rating: Int,
     val comment: String,
     val date: String,

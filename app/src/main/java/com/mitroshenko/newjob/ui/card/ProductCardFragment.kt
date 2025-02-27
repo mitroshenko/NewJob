@@ -1,20 +1,23 @@
 package com.mitroshenko.newjob.ui.card
 
+import android.content.Context
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.setFragmentResultListener
 import androidx.navigation.findNavController
-import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.mitroshenko.newjob.R
-import com.mitroshenko.newjob.adapter.ProductAdapter
 import com.mitroshenko.newjob.adapter.ReviewsAdapter
-import com.mitroshenko.newjob.databinding.FragmentBasketBinding
+import com.mitroshenko.newjob.databinding.ActivityCodeBinding.bind
 import com.mitroshenko.newjob.databinding.FragmentProductCardBinding
+import com.mitroshenko.newjob.presentation.MainActivity
 import com.mitroshenko.newjob.retrofit.product.Product
-import com.mitroshenko.newjob.retrofit.product.SF_Api
+import com.mitroshenko.newjob.retrofit.product.ProductApi
+import com.mitroshenko.newjob.retrofit.product.Review
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -24,12 +27,6 @@ import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 
 class ProductCardFragment : Fragment() {
-
-//    private val adapter: ProductAdapter by lazy {
-//        ProductAdapter { product ->
-//            view?.findNavController()!!
-//                .navigate(R.id.action_navigation_search_to_productCardFragment)
-//        }
     private val revadapter = ReviewsAdapter()
     private var _binding: FragmentProductCardBinding? = null
     private val binding get() = _binding!!
@@ -45,6 +42,10 @@ class ProductCardFragment : Fragment() {
                 view?.findNavController()!!
                     .navigate(R.id.action_productCardFragment_to_navigation_search)
             }
+            val idd = arguments?.getInt("key")
+            binding.tvPrice1.text = idd.toString()
+
+
 
             val interceptor2 = HttpLoggingInterceptor()
             interceptor2.level = HttpLoggingInterceptor.Level.BODY
@@ -57,25 +58,33 @@ class ProductCardFragment : Fragment() {
                 .baseUrl("https://dummyjson.com")
                 .client(client2)
                 .addConverterFactory(GsonConverterFactory.create()).build()
-            val sf_Api = retrofit.create(SF_Api::class.java)
+            val sf_Api = retrofit.create(ProductApi::class.java)
 
-            CoroutineScope(Dispatchers.IO).launch {
-                val list = sf_Api.getCardById(1)
-                activity?.runOnUiThread {
-                    binding.apply {
-                        revadapter.submitList(list.reviews1)
-                    }
-                }
-            }
+//            CoroutineScope(Dispatchers.IO).launch {
+//                val list = sf_Api.getCardById(1)
+//                activity?.runOnUiThread {
+//                    binding.apply {
+//                        revadapter.submitList(list.reviews)
+//                    }
+//                }
+//            }
+//            CoroutineScope(Dispatchers.IO).launch {
+//                val model = sf_Api.getCardById(1)
+//                activity?.runOnUiThread {
+//                    binding.apply {
+//                        tvPrice2.text = model.price.toString()
+//                        tvTitle.text = model.title
+//                        tvDescription.text = model.description
+//                        tvRaiting.text = model.rating.toString()
+//                        tvBrand.text = model.brand
+//                        tvPrice1.text = "Price"
+//                        tvDescriptionTitle.text = "Description"
+//                        tvReviews.text = "Reviews"
+//                    }
+//                }
+//            }
             return root
     }
-//    fun add(products: Product) = with(binding) {
-//        tvPrice2.text = products.price.toString()
-//        tvRaiting.text = products.rating.toString()
-//        tvBrand.text = products.brand
-//        tvDescription.text = products.description
-//        tvTitle.text = products.title
-//    }
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null

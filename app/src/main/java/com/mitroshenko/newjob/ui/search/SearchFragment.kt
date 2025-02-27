@@ -1,19 +1,28 @@
 package com.mitroshenko.newjob.ui.search
 
+import android.content.Context
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.SearchView
+import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.FragmentManager
+import androidx.fragment.app.setFragmentResult
+import androidx.fragment.app.viewModels
+import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
 import com.mitroshenko.newjob.R
 import com.mitroshenko.newjob.adapter.ProductAdapter
-import com.mitroshenko.newjob.adapter.ReviewsAdapter
 import com.mitroshenko.newjob.databinding.FragmentSearchBinding
-import com.mitroshenko.newjob.retrofit.product.SF_Api
+import com.mitroshenko.newjob.presentation.MainActivity
+import com.mitroshenko.newjob.retrofit.product.Product
+import com.mitroshenko.newjob.retrofit.product.ProductApi
+import com.mitroshenko.newjob.retrofit.product.Products
+import com.mitroshenko.newjob.ui.card.ProductCardFragment
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -30,17 +39,16 @@ class SearchFragment : Fragment() {
                 .navigate(R.id.action_navigation_search_to_productCardFragment)
         }
     }
-
     private var _binding: FragmentSearchBinding? = null
     private val binding get() = _binding!!
-
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        val homeViewModel =
-            ViewModelProvider(this).get(SearchViewModel::class.java)
+//        val searchViewModel =
+//            ViewModelProvider(this).get(SearchViewModel::class.java)
+
 
         _binding = FragmentSearchBinding.inflate(inflater, container, false)
         val root: View = binding.root
@@ -48,10 +56,14 @@ class SearchFragment : Fragment() {
         binding.rcRecommendations.layoutManager = GridLayoutManager(context, 2)
         binding.rcRecommendations.adapter = adapter
         binding.rcRecommendations.setOnClickListener {
-        view?.findNavController()!!
+            val fragment = SearchFragment()
+            val bundle = Bundle()
+            bundle.putInt("key", 1)
+            fragment.arguments = bundle
+            view?.findNavController()!!
             .navigate(R.id.action_navigation_search_to_productCardFragment)
-    }
 
+    }
         val interceptor = HttpLoggingInterceptor()
         interceptor.level = HttpLoggingInterceptor.Level.BODY
 
@@ -63,7 +75,7 @@ class SearchFragment : Fragment() {
             .baseUrl("https://dummyjson.com")
             .client(client)
             .addConverterFactory(GsonConverterFactory.create()).build()
-        val sf_Api = retrofit.create(SF_Api::class.java)
+        val sf_Api = retrofit.create(ProductApi::class.java)
 
         binding.svSearch.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
             override fun onQueryTextSubmit(text: String?): Boolean {

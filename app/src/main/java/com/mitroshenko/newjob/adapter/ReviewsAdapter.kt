@@ -9,13 +9,13 @@ import androidx.recyclerview.widget.RecyclerView
 import com.mitroshenko.newjob.R
 import com.mitroshenko.newjob.databinding.ReviewsRcviewBinding
 import com.mitroshenko.newjob.retrofit.product.Product
-import com.mitroshenko.newjob.retrofit.product.ReviewsModel
+import com.mitroshenko.newjob.retrofit.product.Review
 
 
-class ReviewsAdapter: ListAdapter <ReviewsModel, ReviewsAdapter.Holder>(Comparator()){
+class ReviewsAdapter: ListAdapter <Review, ReviewsAdapter.Holder>(DiffUtilCallback){
     class Holder(view: View): RecyclerView.ViewHolder(view){
         private val binding = ReviewsRcviewBinding.bind(view)
-        fun bind(reviews: ReviewsModel) = with(binding) {
+        fun bind(reviews: Review) = with(binding) {
             tvRaiting2.text = reviews.rating.toString()
             tvComment.text = reviews.comment
             tvDate.text = reviews.date
@@ -29,11 +29,12 @@ class ReviewsAdapter: ListAdapter <ReviewsModel, ReviewsAdapter.Holder>(Comparat
             }
         }
     }
-    class Comparator: DiffUtil.ItemCallback<ReviewsModel>(){
-        override fun areItemsTheSame(oldItem: ReviewsModel, newItem: ReviewsModel): Boolean {
-            return oldItem.date == newItem.date
+
+    object DiffUtilCallback : DiffUtil.ItemCallback<Review>(){
+        override fun areItemsTheSame(oldItem: Review, newItem: Review): Boolean {
+            return oldItem.comment == newItem.comment
         }
-        override fun areContentsTheSame(oldItem: ReviewsModel, newItem: ReviewsModel): Boolean {
+        override fun areContentsTheSame(oldItem: Review, newItem: Review): Boolean {
             return oldItem == newItem
         }
     }

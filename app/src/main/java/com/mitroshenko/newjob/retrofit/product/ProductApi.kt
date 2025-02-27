@@ -4,11 +4,11 @@ import retrofit2.http.GET
 import retrofit2.http.Path
 import retrofit2.http.Query
 
-interface SF_Api {
+interface ProductApi {
     @GET("products")
     suspend fun getAllProducts(): Products
     @GET("products/search")
     suspend fun getProductsByName(@Query("q") name: String): Products
     @GET("products/{id}")
-    suspend fun getCardById(@Path("id") id: Int): Reviews1
+    suspend fun getCardById(@Path("id") id: Int): Product
 }
