@@ -8,6 +8,7 @@ import android.view.ViewGroup
 import android.widget.SearchView
 import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.FragmentActivity
 import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.setFragmentResult
 import androidx.fragment.app.viewModels
@@ -15,9 +16,11 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
+import com.bumptech.glide.Glide
 import com.mitroshenko.newjob.R
 import com.mitroshenko.newjob.adapter.ProductAdapter
 import com.mitroshenko.newjob.databinding.FragmentSearchBinding
+import com.mitroshenko.newjob.databinding.RecomRcviewBinding
 import com.mitroshenko.newjob.presentation.MainActivity
 import com.mitroshenko.newjob.retrofit.product.Product
 import com.mitroshenko.newjob.retrofit.product.ProductApi
@@ -61,9 +64,9 @@ class SearchFragment : Fragment() {
             fragment.arguments = bundle
             view?.findNavController()!!
             .navigate(R.id.action_navigation_search_to_productCardFragment)
-            searchViewModel.productList.observe(viewLifecycleOwner, {
-                adapter.submitList(it)
-            })
+//            searchViewModel.productList.observe(viewLifecycleOwner, {
+//                adapter.submitList(it)
+//            })
 
     }
         val interceptor = HttpLoggingInterceptor()
@@ -78,6 +81,8 @@ class SearchFragment : Fragment() {
             .client(client)
             .addConverterFactory(GsonConverterFactory.create()).build()
         val sf_Api = retrofit.create(ProductApi::class.java)
+
+
 
         binding.svSearch.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
             override fun onQueryTextSubmit(text: String?): Boolean {
@@ -95,22 +100,27 @@ class SearchFragment : Fragment() {
             override fun onQueryTextChange(text: String?): Boolean {
                 CoroutineScope(Dispatchers.IO).launch {
                     val list = text?.let { sf_Api.getProductsByName(it) }
-//                    activity?.runOnUiThread {
-//                        binding.apply {
-//                            adapter.submitList(list?.products)
-//                        }
-//                    }
+                    activity?.runOnUiThread {
+                        binding.apply {
+                            adapter.submitList(list?.products)
+                        }
+                    }
                 }
                 return true
             }
         })
         CoroutineScope(Dispatchers.IO).launch {
             val list = sf_Api.getAllProducts()
-//            activity?.runOnUiThread {
-//                binding.apply {
-//                    adapter.submitList(list.products)
-//                }
-//            }
+            val url = "https://co14tula-r71.gosuslugi.ru/netcat_files/45/255/385289_maslenica_dlya_detey_6_7_let_27.jpg"
+            val imageCard = binding.imageView4
+            Glide.with(context)
+                .load(url)
+                .into(imageCard)
+            activity?.runOnUiThread {
+                binding.apply {
+                    adapter.submitList(list.products)
+                }
+            }
         }
         return root
     }
