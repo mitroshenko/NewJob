@@ -42,8 +42,8 @@ class ProductCardFragment : Fragment() {
                 view?.findNavController()!!
                     .navigate(R.id.action_productCardFragment_to_navigation_search)
             }
-            val idd = arguments?.getInt("key")
-            binding.tvPrice1.text = idd.toString()
+            val hello = arguments?.getString("key")
+            binding.tvPrice1.text = hello
 
 
 

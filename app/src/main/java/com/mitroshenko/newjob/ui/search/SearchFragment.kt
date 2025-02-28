@@ -46,9 +46,8 @@ class SearchFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-//        val searchViewModel =
-//            ViewModelProvider(this).get(SearchViewModel::class.java)
-
+        val searchViewModel =
+            ViewModelProvider(this).get(SearchViewModel::class.java)
 
         _binding = FragmentSearchBinding.inflate(inflater, container, false)
         val root: View = binding.root
@@ -56,12 +55,15 @@ class SearchFragment : Fragment() {
         binding.rcRecommendations.layoutManager = GridLayoutManager(context, 2)
         binding.rcRecommendations.adapter = adapter
         binding.rcRecommendations.setOnClickListener {
-            val fragment = SearchFragment()
+            val fragment = ProductCardFragment()
             val bundle = Bundle()
-            bundle.putInt("key", 1)
+            bundle.putString("key", "Hello")
             fragment.arguments = bundle
             view?.findNavController()!!
             .navigate(R.id.action_navigation_search_to_productCardFragment)
+            searchViewModel.productList.observe(viewLifecycleOwner, {
+                adapter.submitList(it)
+            })
 
     }
         val interceptor = HttpLoggingInterceptor()
@@ -93,22 +95,22 @@ class SearchFragment : Fragment() {
             override fun onQueryTextChange(text: String?): Boolean {
                 CoroutineScope(Dispatchers.IO).launch {
                     val list = text?.let { sf_Api.getProductsByName(it) }
-                    activity?.runOnUiThread {
-                        binding.apply {
-                            adapter.submitList(list?.products)
-                        }
-                    }
+//                    activity?.runOnUiThread {
+//                        binding.apply {
+//                            adapter.submitList(list?.products)
+//                        }
+//                    }
                 }
                 return true
             }
         })
         CoroutineScope(Dispatchers.IO).launch {
             val list = sf_Api.getAllProducts()
-            activity?.runOnUiThread {
-                binding.apply {
-                    adapter.submitList(list.products)
-                }
-            }
+//            activity?.runOnUiThread {
+//                binding.apply {
+//                    adapter.submitList(list.products)
+//                }
+//            }
         }
         return root
     }

@@ -7,16 +7,16 @@ import androidx.lifecycle.asLiveData
 import com.mitroshenko.newjob.retrofit.product.Product
 import com.mitroshenko.newjob.retrofit.product.Products
 
-//class SearchViewModel(private val products: Products) : ViewModel() {
+//class SearchViewModel(products: Products) : ViewModel() {
 //
-//        val productList: LiveData<List<Product>> = products.products.asLiveData()}
+//        val productList: LiveData<List<Product>> = products.products.asL}
 
-//class SearchViewModel : ViewModel() {
-//
-//        val productList: MutableLiveData<List<Product>> by lazy {
-//                MutableLiveData<List<Product>>()
-//        }
+class SearchViewModel : ViewModel() {
+
+        val productList: MutableLiveData<List<Product>> by lazy {
+                MutableLiveData<List<Product>>()
+        }
 //        val idCard: MutableLiveData<Int> by lazy {
 //                MutableLiveData<Int>()
 //        }
-//}
+}
