@@ -7,7 +7,7 @@
 
     <fragment
         android:id="@+id/navigation_search"
-        android:name="com.mitroshenko.newjob.ui.search.SearchFragment"
+        android:name="com.mitroshenko.newjob.presentation.ui.search.SearchFragment"
         android:label="@string/title_search"
         tools:layout="@layout/fragment_search" >
         <action
@@ -17,30 +17,30 @@
 
     <fragment
         android:id="@+id/navigation_favourites"
-        android:name="com.mitroshenko.newjob.ui.favourites.FavouritesFragment"
+        android:name="com.mitroshenko.newjob.presentation.ui.favourites.FavouritesFragment"
         android:label="@string/title_favourites"
         tools:layout="@layout/fragment_favourites" />
 
     <fragment
         android:id="@+id/navigation_responses"
-        android:name="com.mitroshenko.newjob.ui.basket.BasketFragment"
+        android:name="com.mitroshenko.newjob.presentation.ui.basket.BasketFragment"
         android:label="@string/title_responses"
         tools:layout="@layout/fragment_basket" />
 
     <fragment
         android:id="@+id/navigation_messages"
-        android:name="com.mitroshenko.newjob.ui.support.MessagesFragment"
+        android:name="com.mitroshenko.newjob.presentation.ui.support.MessagesFragment"
         android:label="Support"
         tools:layout="@layout/fragment_support" />
 
     <fragment
         android:id="@+id/navigation_profile"
-        android:name="com.mitroshenko.newjob.ui.profile.ProfileFragment"
+        android:name="com.mitroshenko.newjob.presentation.ui.profile.ProfileFragment"
         android:label="Profile"
         tools:layout="@layout/fragment_profile" />
     <fragment
         android:id="@+id/productCardFragment"
-        android:name="com.mitroshenko.newjob.ui.card.ProductCardFragment"
+        android:name="com.mitroshenko.newjob.presentation.ui.card.ProductCardFragment"
         android:label="fragment_product_card"
         tools:layout="@layout/fragment_product_card" >
         <action

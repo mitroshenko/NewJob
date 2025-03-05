@@ -8,7 +8,7 @@ import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.mitroshenko.newjob.R
 import com.mitroshenko.newjob.databinding.RecomRcviewBinding
-import com.mitroshenko.newjob.retrofit.product.Product
+import com.mitroshenko.newjob.data.api.model.product.Product
 
 class ProductAdapter(private val onClick: (Product) -> Unit): ListAdapter<Product, ProductAdapter.Holder>(Comparator()){
     class Holder(view: View, val onClick: (Product) -> Unit): RecyclerView.ViewHolder(view){

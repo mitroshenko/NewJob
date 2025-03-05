@@ -14,15 +14,15 @@
         android:theme="@style/Theme.NewJob"
         tools:targetApi="31">
         <activity
-            android:name=".presentation.CodeActivity"
+            android:name=".presentation.ui.activities.CodeActivity"
             android:exported="false" />
 
         <activity
-            android:name=".presentation.StartActivity"
+            android:name=".presentation.ui.activities.StartActivity"
             android:exported="false"
             android:label="@string/app_name" />
         <activity
-            android:name=".presentation.MainActivity"
+            android:name=".presentation.ui.activities.MainActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
