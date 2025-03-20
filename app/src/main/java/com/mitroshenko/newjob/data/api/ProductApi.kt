@@ -12,5 +12,7 @@ interface ProductApi {
     @GET("products/search")
     suspend fun getProductsByName(@Query("q") name: String): Products
     @GET("products/{id}")
-    suspend fun getCardById(@Path("id") id: Int): Product
+    suspend fun getReviewsById(@Path("id") id: Int): Product
+    @GET("products/{id}")
+    suspend fun getCardById(@Path("id") id: Int): Products
 }

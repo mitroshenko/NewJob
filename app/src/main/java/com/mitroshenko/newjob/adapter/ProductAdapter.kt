@@ -1,14 +1,18 @@
 package com.mitroshenko.newjob.adapter
 
+import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
 import com.mitroshenko.newjob.R
 import com.mitroshenko.newjob.databinding.RecomRcviewBinding
 import com.mitroshenko.newjob.data.api.model.product.Product
+import kotlinx.coroutines.withContext
+
 
 class ProductAdapter(private val onClick: (Product) -> Unit): ListAdapter<Product, ProductAdapter.Holder>(Comparator()){
     class Holder(view: View, val onClick: (Product) -> Unit): RecyclerView.ViewHolder(view){
@@ -19,6 +23,9 @@ class ProductAdapter(private val onClick: (Product) -> Unit): ListAdapter<Produc
             tvPrice.text = products.price.toString()
             tvBrand.text = products.brand
             tvRaiting.text = products.rating.toString()
+                Glide.with()
+                    .load(products.images[0])
+                    .into(imFoto)
         }
         companion object {
             fun create(parent: ViewGroup, onClick: (Product) -> Unit): Holder {
@@ -43,5 +50,6 @@ class ProductAdapter(private val onClick: (Product) -> Unit): ListAdapter<Produc
     }
     override fun onBindViewHolder(holder: Holder, position: Int) {
         holder.bind(getItem(position))
+
     }
 }

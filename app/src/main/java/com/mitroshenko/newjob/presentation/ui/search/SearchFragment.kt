@@ -6,16 +6,13 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
-import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
-import com.bumptech.glide.Glide
 import com.mitroshenko.newjob.R
 import com.mitroshenko.newjob.adapter.ProductAdapter
 import com.mitroshenko.newjob.databinding.FragmentSearchBinding
-import com.mitroshenko.newjob.presentation.ui.IdCardModel
-import com.mitroshenko.newjob.presentation.ui.card.ProductCardFragment
+import com.mitroshenko.newjob.data.api.model.IdCardModel
 
 
 class SearchFragment : Fragment() {

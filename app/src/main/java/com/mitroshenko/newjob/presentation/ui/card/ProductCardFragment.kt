@@ -10,18 +10,16 @@ import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.bumptech.glide.Glide
 import com.mitroshenko.newjob.R
 import com.mitroshenko.newjob.adapter.ReviewsAdapter
-import com.mitroshenko.newjob.databinding.FragmentProductCardBinding
 import com.mitroshenko.newjob.data.api.ProductApi
-import com.mitroshenko.newjob.domain.usecases.LoadProductCard
-import com.mitroshenko.newjob.presentation.ui.IdCardModel
-import com.mitroshenko.newjob.presentation.ui.search.SearchViewModel
+import com.mitroshenko.newjob.databinding.FragmentProductCardBinding
+import com.mitroshenko.newjob.data.api.model.IdCardModel
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import okhttp3.OkHttpClient
-import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 
@@ -39,6 +37,19 @@ class ProductCardFragment : Fragment() {
         productCardViewModel.reviewsList.observe(viewLifecycleOwner, {
             revadapter.submitList(it)
         })
+        productCardViewModel.productList.observe(viewLifecycleOwner, {
+            val card = it.first()
+            binding.apply {
+                tvPrice2.text = card.price.toString()
+                tvTitle.text = card.title
+                tvDescription.text = card.description
+                tvRaiting.text = card.rating.toString()
+                tvBrand.text = card.brand
+                tvPrice1.text = "Price"
+                tvDescriptionTitle.text = "Description"
+                tvReviews.text = "Reviews"
+            }
+        })
 
         _binding = FragmentProductCardBinding.inflate(inflater, container, false)
         val root: View = binding.root
@@ -52,27 +63,15 @@ class ProductCardFragment : Fragment() {
             val idCard = it
             productCardViewModel.loadReviews(idCard)
 //            productCardViewModel.loadCard(idCard)
-        }
-
-//        val client = OkHttpClient.Builder()
+//            val client = OkHttpClient.Builder()
 //            .build()
-//
 //        val retrofit = Retrofit.Builder()
 //            .baseUrl("https://dummyjson.com")
 //            .client(client)
 //            .addConverterFactory(GsonConverterFactory.create()).build()
 //        val sf_Api = retrofit.create(ProductApi::class.java)
-
 //        CoroutineScope(Dispatchers.IO).launch {
-//            val list = sf_Api.getCardById(1)
-//            activity?.runOnUiThread {
-//                binding.apply {
-//                    revadapter.submitList(list.reviews)
-//                }
-//            }
-//        }
-//        CoroutineScope(Dispatchers.IO).launch {
-//            val model = sf_Api.getCardById(1)
+//            val model = sf_Api.getReviewsById(idCard)
 //            activity?.runOnUiThread {
 //                binding.apply {
 //                    tvPrice2.text = model.price.toString()
@@ -86,9 +85,16 @@ class ProductCardFragment : Fragment() {
 //                }
 //            }
 //        }
+        }
+
+//        val url = "https://co14tula-r71.gosuslugi.ru/netcat_files/45/255/385289_maslenica_dlya_detey_6_7_let_27.jpg"
+//        val imageCard =
+//        Glide.with(requireContext())
+//            .load(url)
+//            .into(imageCard)
+
         return root
     }
-
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null

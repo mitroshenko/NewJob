@@ -1,4 +1,4 @@
-package com.mitroshenko.newjob.presentation.ui
+package com.mitroshenko.newjob.data.api.model
 
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
