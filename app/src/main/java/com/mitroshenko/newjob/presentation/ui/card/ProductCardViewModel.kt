@@ -1,12 +1,11 @@
 package com.mitroshenko.newjob.presentation.ui.card
 
-import android.provider.MediaStore.Images
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.mitroshenko.newjob.data.api.ProductApi
-import com.mitroshenko.newjob.data.api.model.product.Product
-import com.mitroshenko.newjob.data.api.model.product.Review
+import com.mitroshenko.newjob.data.model.product.Product
+import com.mitroshenko.newjob.data.model.product.Review
 import kotlinx.coroutines.launch
 import okhttp3.OkHttpClient
 import retrofit2.Retrofit
@@ -15,7 +14,7 @@ import retrofit2.converter.gson.GsonConverterFactory
 class ProductCardViewModel : ViewModel() {
 
     val reviewsList: MutableLiveData<List<Review>> = MutableLiveData()
-    val productList: MutableLiveData<List<Product>> = MutableLiveData()
+    val productList: MutableLiveData<Product> = MutableLiveData()
     val client = OkHttpClient.Builder()
         .build()
     val retrofit = Retrofit.Builder()
@@ -30,11 +29,10 @@ class ProductCardViewModel : ViewModel() {
             reviewsList.postValue(list.reviews)
         }
     }
-
     fun loadCard(id: Int) {
         viewModelScope.launch {
-            val list = sf_Api.getCardById(id)
-            productList.postValue(list.products)
+            val product = sf_Api.getCardById(id)
+            productList.postValue(product)
         }
     }
 }

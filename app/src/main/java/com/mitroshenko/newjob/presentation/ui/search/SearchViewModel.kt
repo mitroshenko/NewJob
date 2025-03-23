@@ -5,7 +5,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.mitroshenko.newjob.data.api.ProductApi
-import com.mitroshenko.newjob.data.api.model.product.Product
+import com.mitroshenko.newjob.data.model.product.Product
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch

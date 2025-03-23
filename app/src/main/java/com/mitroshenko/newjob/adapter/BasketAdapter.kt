@@ -1,36 +1,33 @@
 package com.mitroshenko.newjob.adapter
 
-import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
-import com.bumptech.glide.Glide
 import com.mitroshenko.newjob.R
-import com.mitroshenko.newjob.databinding.RecomRcviewBinding
 import com.mitroshenko.newjob.data.model.product.Product
-import kotlinx.coroutines.withContext
+import com.mitroshenko.newjob.databinding.BasketRcviewBinding
 
 
-class ProductAdapter(private val onClick: (Product) -> Unit): ListAdapter<Product, ProductAdapter.Holder>(Comparator()){
+class BasketAdapter(private val onClick: (Product) -> Unit): ListAdapter<Product, BasketAdapter.Holder>(Comparator()){
     class Holder(view: View, val onClick: (Product) -> Unit): RecyclerView.ViewHolder(view){
-        private val binding = RecomRcviewBinding.bind(view)
+        private val binding = BasketRcviewBinding.bind(view)
         fun bind(products: Product) = with(binding) {
             itemView.setOnClickListener { onClick(products) }
-            tvRecTitle.text = products.title
+            tvTitle.text = products.title
             tvPrice.text = products.price.toString()
             tvBrand.text = products.brand
-            tvRaiting.text = products.rating.toString()
-                Glide.with(binding.root.context)
-                    .load(products.images[0])
-                    .into(imFoto)
+            tvRating.text = products.rating.toString()
+//                Glide.with()
+//                    .load(products.images[0])
+//                    .into(imFoto)
         }
         companion object {
             fun create(parent: ViewGroup, onClick: (Product) -> Unit): Holder {
                 val view: View = LayoutInflater.from(parent.context)
-                    .inflate(R.layout.recom_rcview, parent, false)
+                    .inflate(R.layout.basket_rcview, parent, false)
                 return Holder(view, onClick)
             }
         }
@@ -45,7 +42,7 @@ class ProductAdapter(private val onClick: (Product) -> Unit): ListAdapter<Produc
     }
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): Holder {
         val view = LayoutInflater.from(parent.context)
-            .inflate(R.layout.recom_rcview, parent,false)
+            .inflate(R.layout.basket_rcview, parent,false)
         return Holder(view, onClick)
     }
     override fun onBindViewHolder(holder: Holder, position: Int) {

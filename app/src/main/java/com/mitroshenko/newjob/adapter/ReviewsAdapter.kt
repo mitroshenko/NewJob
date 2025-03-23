@@ -8,7 +8,7 @@ import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.mitroshenko.newjob.R
 import com.mitroshenko.newjob.databinding.ReviewsRcviewBinding
-import com.mitroshenko.newjob.data.api.model.product.Review
+import com.mitroshenko.newjob.data.model.product.Review
 
 
 class ReviewsAdapter: ListAdapter <Review, ReviewsAdapter.Holder>(DiffUtilCallback){

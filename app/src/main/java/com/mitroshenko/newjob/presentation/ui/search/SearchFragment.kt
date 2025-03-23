@@ -12,7 +12,7 @@ import androidx.recyclerview.widget.GridLayoutManager
 import com.mitroshenko.newjob.R
 import com.mitroshenko.newjob.adapter.ProductAdapter
 import com.mitroshenko.newjob.databinding.FragmentSearchBinding
-import com.mitroshenko.newjob.data.api.model.IdCardModel
+import com.mitroshenko.newjob.data.model.product.IdCardModel
 
 
 class SearchFragment : Fragment() {
@@ -31,11 +31,12 @@ class SearchFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        val searchViewModel = ViewModelProvider(this).get(SearchViewModel::class.java)
-        searchViewModel.loadProducts()
-        searchViewModel.productList.observe(viewLifecycleOwner, {
-            adapter.submitList(it)
-        })
+        val searchViewModel = ViewModelProvider(this).get(SearchViewModel::class.java).apply {
+            loadProducts()
+            productList.observe(viewLifecycleOwner) {
+                adapter.submitList(it)
+            }
+        }
         _binding = FragmentSearchBinding.inflate(inflater, container, false)
         val root: View = binding.root
 
@@ -47,12 +48,6 @@ class SearchFragment : Fragment() {
         }
 
         binding.svSearch.setOnQueryTextListener(searchViewModel.queryTextListener)
-//        val url =
-//            "https://co14tula-r71.gosuslugi.ru/netcat_files/45/255/385289_maslenica_dlya_detey_6_7_let_27.jpg"
-//        val imageCard =
-//        Glide.with(requireContext())
-//            .load(url)
-//            .into(imageCard)
         return root
     }
     override fun onDestroyView() {

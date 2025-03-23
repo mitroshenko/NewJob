@@ -1,7 +1,7 @@
 package com.mitroshenko.newjob.data.api
 
-import com.mitroshenko.newjob.data.api.model.product.Product
-import com.mitroshenko.newjob.data.api.model.product.Products
+import com.mitroshenko.newjob.data.model.product.Product
+import com.mitroshenko.newjob.data.model.product.Products
 import retrofit2.http.GET
 import retrofit2.http.Path
 import retrofit2.http.Query
@@ -14,5 +14,5 @@ interface ProductApi {
     @GET("products/{id}")
     suspend fun getReviewsById(@Path("id") id: Int): Product
     @GET("products/{id}")
-    suspend fun getCardById(@Path("id") id: Int): Products
+    suspend fun getCardById(@Path("id") id: Int): Product
 }
