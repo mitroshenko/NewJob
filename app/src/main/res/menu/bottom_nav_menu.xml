@@ -12,7 +12,7 @@
         android:title="@string/title_favourites" />
 
     <item
-        android:id="@+id/navigation_responses"
+        android:id="@+id/navigation_basket"
         android:icon="@drawable/baseline_add_shopping_cart_24"
         android:title="@string/title_responses" />
 

@@ -1,7 +1,5 @@
 package com.mitroshenko.newjob.data.model.product
 
-
-
 data class Product(
     val id: Int,
     val title: String,

@@ -35,7 +35,7 @@ class MainActivity : AppCompatActivity() {
             setOf(
                 R.id.navigation_search,
                 R.id.navigation_favourites,
-                R.id.navigation_responses,
+                R.id.navigation_basket,
                 R.id.navigation_messages,
                 R.id.navigation_profile
             )

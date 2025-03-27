@@ -13,15 +13,10 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.bumptech.glide.Glide
 import com.mitroshenko.newjob.R
 import com.mitroshenko.newjob.adapter.ReviewsAdapter
-import com.mitroshenko.newjob.data.api.ProductApi
+import com.mitroshenko.newjob.data.database.ProductsApplications
 import com.mitroshenko.newjob.databinding.FragmentProductCardBinding
 import com.mitroshenko.newjob.data.model.product.IdCardModel
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.launch
-import okhttp3.OkHttpClient
-import retrofit2.Retrofit
-import retrofit2.converter.gson.GsonConverterFactory
+import com.mitroshenko.newjob.data.repository.Entity
 
 class ProductCardFragment : Fragment() {
     private val idCardModel: IdCardModel by activityViewModels()
@@ -34,6 +29,7 @@ class ProductCardFragment : Fragment() {
     ): View? {
         val productCardViewModel =
             ViewModelProvider(this).get(ProductCardViewModel::class.java).apply {
+                ProductCardViewModelFactory((application as ProductsApplications).repository)
                 reviewsList.observe(viewLifecycleOwner) {
                     revadapter.submitList(it)
                 }
@@ -65,10 +61,24 @@ class ProductCardFragment : Fragment() {
             val idCard = it
             productCardViewModel.loadReviews(idCard)
             productCardViewModel.loadCard(idCard)
+            binding.btnAdd.setOnClickListener{
+                productCardViewModel.insert(
+                    prod = Entity(
+                        title = binding.tvTitle.text.toString(),
+                        brand = binding.tvBrand.text.toString(),
+                        rating = binding.tvRaiting.text.toString(),
+                        price = binding.tvPrice2.text.toString(),
+                        images = binding.ivFoto.toString(),
+                        idCardProd = idCard
+                    ),
+                    onFinishCallback = {
+                        finish()
+                    }
+                )
+            }
         }
         return root
     }
-
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null

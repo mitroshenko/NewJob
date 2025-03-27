@@ -22,10 +22,14 @@
         tools:layout="@layout/fragment_favourites" />
 
     <fragment
-        android:id="@+id/navigation_responses"
+        android:id="@+id/navigation_basket"
         android:name="com.mitroshenko.newjob.presentation.ui.basket.BasketFragment"
         android:label="@string/title_responses"
-        tools:layout="@layout/fragment_basket" />
+        tools:layout="@layout/fragment_basket" >
+        <action
+            android:id="@+id/action_navigation_responses_to_productCardFragment"
+            app:destination="@id/productCardFragment" />
+    </fragment>
 
     <fragment
         android:id="@+id/navigation_messages"
