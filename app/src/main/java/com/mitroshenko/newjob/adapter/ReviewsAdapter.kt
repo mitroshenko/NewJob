@@ -28,7 +28,6 @@ class ReviewsAdapter: ListAdapter <Review, ReviewsAdapter.Holder>(DiffUtilCallba
             }
         }
     }
-
     object DiffUtilCallback : DiffUtil.ItemCallback<Review>(){
         override fun areItemsTheSame(oldItem: Review, newItem: Review): Boolean {
             return oldItem.comment == newItem.comment
