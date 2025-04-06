@@ -1,4 +1,4 @@
-package com.mitroshenko.newjob.data.repository
+package com.mitroshenko.newjob.data.repository.basket
 
 import android.os.Parcelable
 import androidx.room.ColumnInfo

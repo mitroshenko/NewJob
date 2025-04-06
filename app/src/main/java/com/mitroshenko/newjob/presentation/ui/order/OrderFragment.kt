@@ -1,52 +1,57 @@
-package com.mitroshenko.newjob.presentation.ui.favourites
+package com.mitroshenko.newjob.presentation.ui.order
 
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
-import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.findNavController
 import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.mitroshenko.newjob.R
 import com.mitroshenko.newjob.adapter.BasketAdapter
-import com.mitroshenko.newjob.adapter.FavouriteAdapter
 import com.mitroshenko.newjob.data.model.IdCard.IdCardModel
 import com.mitroshenko.newjob.databinding.FragmentBasketBinding
-import com.mitroshenko.newjob.databinding.FragmentFavouritesBinding
+import com.mitroshenko.newjob.databinding.FragmentOrderBinding
 import com.mitroshenko.newjob.presentation.ui.basket.BasketViewModel
 import com.mitroshenko.newjob.presentation.ui.basket.BasketViewModelFactory
 
-class FavouritesFragment : Fragment() {
-    private val viewModel: FavouriteViewModel by viewModels { FavouriteViewModelFactory() }
+
+class OrderFragment : Fragment() {
+    private val basketViewModel: BasketViewModel by viewModels { BasketViewModelFactory() }
     private val idCardModel: IdCardModel by activityViewModels()
-    private val adapter: FavouriteAdapter by lazy {
-        FavouriteAdapter { entity ->
+    private val adapter: BasketAdapter by lazy {
+        BasketAdapter { entity ->
             idCardModel.idCard.value = entity.idCardProd
             view?.findNavController()!!
-                .navigate(R.id.action_navigation_favourites_to_productCardFragment)
+                .navigate(R.id.action_navigation_responses_to_productCardFragment)
         }
     }
-    private var _binding: FragmentFavouritesBinding? = null
+    private var _binding: FragmentOrderBinding? = null
     private val binding get() = _binding!!
+
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        _binding = FragmentFavouritesBinding.inflate(inflater, container, false)
+        _binding = FragmentOrderBinding.inflate(inflater, container, false)
         val root: View = binding.root
-        binding.rcFavourite.layoutManager = LinearLayoutManager(context)
-        binding.rcFavourite.adapter = adapter
-        viewModel.allFavourite.observe(viewLifecycleOwner) { fav ->
-            fav.let { adapter.submitList(it) }
+        binding.apply {
+            rcBasket.layoutManager = LinearLayoutManager(context)
+            rcBasket.adapter = adapter
+            rcBasket.setOnClickListener {
+                view?.findNavController()!!
+                    .navigate(R.id.action_navigation_search_to_productCardFragment)
+            }
         }
-        viewModel.apply {
+        basketViewModel.allProducts.observe(viewLifecycleOwner) { prod ->
+            prod.let { adapter.submitList(it) }
+        }
+        basketViewModel.apply {
             val simpleCallback =
                 object : ItemTouchHelper.SimpleCallback(
                     0,
@@ -72,12 +77,11 @@ class FavouritesFragment : Fragment() {
                     }
                 }
             val itemTouchHelper = ItemTouchHelper(simpleCallback)
-            itemTouchHelper.attachToRecyclerView(binding.rcFavourite)
-            allFavourite.observe(viewLifecycleOwner) { fav ->
-                fav.let { adapter.submitList(it) }
+            itemTouchHelper.attachToRecyclerView(binding.rcBasket)
+            allProducts.observe(viewLifecycleOwner) { prod ->
+                prod.let { adapter.submitList(it) }
             }
         }
-
         return root
     }
     override fun onDestroyView() {

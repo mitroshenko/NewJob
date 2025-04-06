@@ -8,16 +8,15 @@ import android.view.ViewGroup
 import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.LifecycleOwner
-import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.bumptech.glide.Glide
 import com.mitroshenko.newjob.R
 import com.mitroshenko.newjob.adapter.ReviewsAdapter
-import com.mitroshenko.newjob.data.database.ProductsApplications
 import com.mitroshenko.newjob.databinding.FragmentProductCardBinding
-import com.mitroshenko.newjob.data.model.product.IdCardModel
-import com.mitroshenko.newjob.data.repository.Entity
+import com.mitroshenko.newjob.data.model.IdCard.IdCardModel
+import com.mitroshenko.newjob.data.repository.basket.Entity
+import com.mitroshenko.newjob.data.repository.favourites.FavouriteEntity
 
 class ProductCardFragment : Fragment() {
     private val viewModel: ProductCardViewModel by viewModels {ProductCardViewModelFactory()}
@@ -29,9 +28,6 @@ class ProductCardFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-//        val productCardViewModel =
-//            ViewModelProvider(this).get(ProductCardViewModel::class.java).apply {
-//            }
         _binding = FragmentProductCardBinding.inflate(inflater, container, false)
         val root: View = binding.root
         binding.rcReviews.layoutManager = LinearLayoutManager(context)
@@ -40,39 +36,55 @@ class ProductCardFragment : Fragment() {
             view?.findNavController()!!
                 .navigate(R.id.action_productCardFragment_to_navigation_search)
         }
-        viewModel.productList.observe(viewLifecycleOwner){card->
-            binding.apply {
-                tvPrice2.text = card.price.toString()
-                tvTitle.text = card.title
-                tvDescription.text = card.description
-                tvRaiting.text = card.rating.toString()
-                tvBrand.text = card.brand
-                tvPrice1.text = "Price"
-                tvDescriptionTitle.text = "Description"
-                tvReviews.text = "Reviews"
-                Glide.with(requireContext())
-                    .load(card.images[0])
-                    .into(ivFoto)
+        viewModel.apply {
+            productList.observe(viewLifecycleOwner) { card ->
+                binding.apply {
+                    tvPrice2.text = card.price.toString()
+                    tvTitle.text = card.title
+                    tvDescription.text = card.description
+                    tvRaiting.text = card.rating.toString()
+                    tvBrand.text = card.brand
+                    tvPrice1.text = "Price"
+                    tvDescriptionTitle.text = "Description"
+                    tvReviews.text = "Reviews"
+                    Glide.with(requireContext())
+                        .load(card.images[0])
+                        .into(ivFoto)
+                }
             }
-        }
-        viewModel.reviewsList.observe(viewLifecycleOwner) {
-            revadapter.submitList(it)
+            reviewsList.observe(viewLifecycleOwner) {
+                revadapter.submitList(it)
+            }
         }
         idCardModel.idCard.observe(activity as LifecycleOwner) {
             val idCard = it
-            viewModel.loadReviews(idCard)
-            viewModel.loadCard(idCard)
-            binding.btnAdd.setOnClickListener{
-                viewModel.insert(
-                    prod = Entity(
-                        title = binding.tvTitle.text.toString(),
-                        brand = binding.tvBrand.text.toString(),
-                        rating = binding.tvRaiting.text.toString(),
-                        price = binding.tvPrice2.text.toString(),
-                        images = binding.ivFoto.toString(),
-                        idCardProd = idCard
+            viewModel.apply {
+                loadReviews(idCard)
+                loadCard(idCard)
+                binding.icFav2.setOnClickListener{
+                    viewModel.insertFavourite(
+                        favouriteEntity = FavouriteEntity(
+                            title = binding.tvTitle.text.toString(),
+                            brand = binding.tvBrand.text.toString(),
+                            rating = binding.tvRaiting.text.toString(),
+                            price = binding.tvPrice2.text.toString(),
+                            images = binding.ivFoto.toString(),
+                            idCardProd = idCard
+                        )
                     )
-                )
+                }
+                binding.btnAdd.setOnClickListener{
+                    viewModel.insertBasket(
+                        prod = Entity(
+                            title = binding.tvTitle.text.toString(),
+                            brand = binding.tvBrand.text.toString(),
+                            rating = binding.tvRaiting.text.toString(),
+                            price = binding.tvPrice2.text.toString(),
+                            images = binding.ivFoto.toString(),
+                            idCardProd = idCard
+                        )
+                    )
+                }
             }
         }
         return root

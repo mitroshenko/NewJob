@@ -25,7 +25,7 @@ class ProductAdapter(private val onClick: (Product) -> Unit): ListAdapter<Produc
             tvRaiting.text = products.rating.toString()
                 Glide.with(binding.root.context)
                     .load(products.images[0])
-                    .into(imBasketFoto)
+                    .into(ivFavourite)
         }
         companion object {
             fun create(parent: ViewGroup, onClick: (Product) -> Unit): Holder {

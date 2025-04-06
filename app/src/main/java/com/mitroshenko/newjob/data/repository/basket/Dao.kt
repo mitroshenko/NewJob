@@ -1,4 +1,4 @@
-package com.mitroshenko.newjob.data.repository
+package com.mitroshenko.newjob.data.repository.basket
 
 import androidx.room.Dao
 import androidx.room.Delete

@@ -8,8 +8,7 @@ import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.mitroshenko.newjob.R
-import com.mitroshenko.newjob.data.model.product.Product
-import com.mitroshenko.newjob.data.repository.Entity
+import com.mitroshenko.newjob.data.repository.basket.Entity
 import com.mitroshenko.newjob.databinding.BasketRcviewBinding
 
 
@@ -24,7 +23,7 @@ class BasketAdapter(private val onClick: (Entity) -> Unit): ListAdapter<Entity, 
             tvRating.text = entity.rating
             Glide.with(binding.root.context)
                 .load(entity.images)
-                .into(imBasketFoto)
+                .into(ivFavourite)
         }
         companion object {
             fun create(parent: ViewGroup, onClick: (Entity) -> Unit): Holder {

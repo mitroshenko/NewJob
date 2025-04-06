@@ -12,7 +12,7 @@ import androidx.recyclerview.widget.GridLayoutManager
 import com.mitroshenko.newjob.R
 import com.mitroshenko.newjob.adapter.ProductAdapter
 import com.mitroshenko.newjob.databinding.FragmentSearchBinding
-import com.mitroshenko.newjob.data.model.product.IdCardModel
+import com.mitroshenko.newjob.data.model.IdCard.IdCardModel
 
 
 class SearchFragment : Fragment() {

@@ -1,4 +1,4 @@
-package com.mitroshenko.newjob.data.repository
+package com.mitroshenko.newjob.data.repository.basket
 
 import android.content.Context
 import androidx.annotation.WorkerThread
@@ -7,7 +7,7 @@ import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.SupervisorJob
 import kotlinx.coroutines.flow.Flow
 
-class ProductRepository(private val dao: Dao) {
+class BasketRepository(private val dao: Dao) {
     val allProducts: Flow<List<Entity>> = dao.getAlphabetizedProducts()
 
     @WorkerThread
