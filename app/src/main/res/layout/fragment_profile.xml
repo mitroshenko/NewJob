@@ -1,13 +1,195 @@
 <?xml version="1.0" encoding="utf-8"?>
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".presentation.ui.profile.ProfileFragment">
 
-    <TextView
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:text="Hello" />
+        android:orientation="vertical">
 
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@android:drawable/alert_light_frame"
+            android:hapticFeedbackEnabled="false">
+
+            <ImageView
+                android:id="@+id/ivMyProfile"
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:layout_marginStart="10dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginBottom="10dp"
+                android:src="@drawable/iv_profile_foto"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/tvMyProfile"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="10dp"
+                android:fontFamily="@font/frank_ruhl_libre"
+                android:text="My profile"
+                android:textColor="@color/black"
+                android:textSize="24sp"
+                app:layout_constraintStart_toEndOf="@+id/ivMyProfile"
+                app:layout_constraintTop_toTopOf="@+id/ivMyProfile" />
+
+            <TextView
+                android:id="@+id/tvName"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:textColor="@color/black"
+                android:fontFamily="@font/frank_ruhl_libre"
+                android:text="Ivan Mitroshenko"
+                android:textSize="20sp"
+                app:layout_constraintStart_toStartOf="@+id/tvMyProfile"
+                app:layout_constraintTop_toBottomOf="@+id/tvMyProfile" />
+
+            <TextView
+                android:id="@+id/tvCity"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:fontFamily="@font/frank_ruhl_libre"
+                android:text="Nizhny Novgorod"
+                android:textSize="16sp"
+                android:textColor="@color/black"
+                app:layout_constraintStart_toStartOf="@+id/tvName"
+                app:layout_constraintTop_toBottomOf="@+id/tvName" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <Button
+                android:id="@+id/btnOrders"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:background="@android:drawable/divider_horizontal_textfield"
+                android:fontFamily="@font/frank_ruhl_libre"
+                android:gravity="start|center_vertical"
+                android:text="My orders"
+                android:textAllCaps="false"
+                android:textColor="@color/black"
+                android:textSize="18sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <Button
+                android:id="@+id/btnReviews"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="2dp"
+                android:background="@android:drawable/divider_horizontal_textfield"
+                android:backgroundTint="@color/white"
+                android:fontFamily="@font/frank_ruhl_libre"
+                android:gravity="start|center_vertical"
+                android:text="My reviews"
+                android:textAllCaps="false"
+                android:textColor="@color/black"
+                android:textSize="18sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/btnOrders" />
+
+            <Button
+                android:id="@+id/btnPromo"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="2dp"
+                android:background="@android:drawable/divider_horizontal_textfield"
+                android:backgroundTint="@color/white"
+                android:fontFamily="@font/frank_ruhl_libre"
+                android:gravity="start|center_vertical"
+                android:text="My promocodes"
+                android:textAllCaps="false"
+                android:textColor="@color/black"
+                android:textSize="18sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/btnReviews" />
+
+            <Button
+                android:id="@+id/btnChat"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="2dp"
+                android:background="@android:drawable/divider_horizontal_textfield"
+                android:backgroundTint="@color/white"
+                android:fontFamily="@font/frank_ruhl_libre"
+                android:gravity="start|center_vertical"
+                android:text="My chat"
+                android:textAllCaps="false"
+                android:textColor="@color/black"
+                android:textSize="18sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/btnPromo" />
+
+            <Button
+                android:id="@+id/btnNotifications"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="2dp"
+                android:background="@android:drawable/divider_horizontal_textfield"
+                android:backgroundTint="@color/white"
+                android:fontFamily="@font/frank_ruhl_libre"
+                android:gravity="start|center_vertical"
+                android:text="Notifications"
+                android:textAllCaps="false"
+                android:textColor="@color/black"
+                android:textSize="18sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/btnChat" />
+
+            <Button
+                android:id="@+id/btnSettings"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="2dp"
+                android:background="@android:drawable/divider_horizontal_textfield"
+                android:backgroundTint="@color/white"
+                android:fontFamily="@font/frank_ruhl_libre"
+                android:gravity="start|center_vertical"
+                android:text="Settings"
+                android:textAllCaps="false"
+                android:textColor="@color/black"
+                android:textSize="18sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/btnNotifications" />
+
+            <Button
+                android:id="@+id/btnExit"
+                android:layout_width="130dp"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="30dp"
+                android:backgroundTint="#FA1818"
+                android:text="Exit"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent" />
+
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+    </LinearLayout>
 </FrameLayout>

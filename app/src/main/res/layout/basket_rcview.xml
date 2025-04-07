@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:background="@android:drawable/editbox_background">
+    android:background="@android:drawable/dialog_holo_light_frame">
 
     <ImageView
         android:id="@+id/ivFavourite"
@@ -49,24 +49,4 @@
         app:layout_constraintBottom_toBottomOf="@+id/ivFavourite"
         app:layout_constraintStart_toEndOf="@+id/ivFavourite" />
 
-    <ImageView
-        android:id="@+id/imRating"
-        android:layout_width="15dp"
-        android:layout_height="15dp"
-        android:layout_marginEnd="5dp"
-        app:layout_constraintBottom_toBottomOf="@+id/tvRating"
-        app:layout_constraintEnd_toStartOf="@+id/tvRating"
-        app:srcCompat="@drawable/ic_raiting" />
-
-    <TextView
-        android:id="@+id/tvRating"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="10dp"
-        android:layout_marginBottom="10dp"
-        android:gravity="bottom"
-        android:text="TextView"
-        android:textColor="@color/black"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent" />
 </androidx.constraintlayout.widget.ConstraintLayout>

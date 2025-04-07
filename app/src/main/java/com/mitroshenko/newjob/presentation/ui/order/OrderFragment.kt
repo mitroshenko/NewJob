@@ -47,6 +47,10 @@ class OrderFragment : Fragment() {
                 view?.findNavController()!!
                     .navigate(R.id.action_navigation_search_to_productCardFragment)
             }
+            btnArrange.setOnClickListener{
+                view?.findNavController()!!
+                    .navigate(R.id.action_orderFragment_to_confirmationFragment)
+            }
         }
         basketViewModel.allProducts.observe(viewLifecycleOwner) { prod ->
             prod.let { adapter.submitList(it) }

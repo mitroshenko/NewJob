@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ConfirmationFragment">
+    tools:context=".presentation.ui.confirmation.ConfirmationFragment">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
@@ -23,24 +23,24 @@
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintVertical_bias="0.25" />
 
+        <Button
+            android:id="@+id/btnContinue"
+            android:layout_width="200dp"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="100dp"
+            android:text="Continue"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="@+id/imageView4"
+            app:layout_constraintStart_toStartOf="@+id/imageView4" />
+
         <ImageView
-            android:id="@+id/imageView2"
+            android:id="@+id/imageView4"
             android:layout_width="100dp"
             android:layout_height="100dp"
             android:layout_marginTop="30dp"
-            android:src="@drawable/ivOk"
+            android:src="@drawable/iv_ok"
             app:layout_constraintEnd_toEndOf="@+id/tvConfirmation"
             app:layout_constraintStart_toStartOf="@+id/tvConfirmation"
             app:layout_constraintTop_toBottomOf="@+id/tvConfirmation" />
-
-        <Button
-            android:id="@+id/button"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="100dp"
-            android:text="Continue shopping"
-            app:layout_constraintEnd_toEndOf="@+id/imageView2"
-            app:layout_constraintStart_toStartOf="@+id/imageView2"
-            app:layout_constraintTop_toBottomOf="@+id/imageView2" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </FrameLayout>

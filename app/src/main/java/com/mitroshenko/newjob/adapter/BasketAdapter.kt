@@ -20,7 +20,6 @@ class BasketAdapter(private val onClick: (Entity) -> Unit): ListAdapter<Entity, 
             tvTitle.text = entity.title
             tvPrice.text = entity.price
             tvBrand.text = entity.brand
-            tvRating.text = entity.rating
             Glide.with(binding.root.context)
                 .load(entity.images)
                 .into(ivFavourite)

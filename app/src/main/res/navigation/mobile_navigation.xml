@@ -69,7 +69,7 @@
     </fragment>
     <fragment
         android:id="@+id/confirmationFragment"
-        android:name="com.mitroshenko.newjob.ConfirmationFragment"
+        android:name="com.mitroshenko.newjob.presentation.ui.confirmation.ConfirmationFragment"
         android:label="fragment_confirmation"
         tools:layout="@layout/fragment_confirmation" >
         <action
