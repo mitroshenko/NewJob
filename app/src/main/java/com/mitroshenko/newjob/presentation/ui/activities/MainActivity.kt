@@ -13,16 +13,10 @@ import com.mitroshenko.newjob.databinding.ActivityMainBinding
 class MainActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityMainBinding
-    private var idCard : Int? = null
-    fun setIdCard(idCard: Int){
-        this.idCard = idCard
-    }
-    fun getIdCard(): Int?{
-        return idCard
-    }
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
+        supportActionBar!!.hide()
 
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
