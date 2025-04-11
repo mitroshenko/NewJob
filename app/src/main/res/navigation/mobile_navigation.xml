@@ -48,7 +48,17 @@
         android:id="@+id/navigation_profile"
         android:name="com.mitroshenko.newjob.presentation.ui.profile.ProfileFragment"
         android:label="Profile"
-        tools:layout="@layout/fragment_profile" />
+        tools:layout="@layout/fragment_profile" >
+        <action
+            android:id="@+id/action_navigation_profile_to_promoFragment"
+            app:destination="@id/promoFragment" />
+        <action
+            android:id="@+id/action_navigation_profile_to_navigation_messages"
+            app:destination="@id/navigation_messages" />
+        <action
+            android:id="@+id/action_navigation_profile_to_myReviewsFragment"
+            app:destination="@id/myReviewsFragment" />
+    </fragment>
     <fragment
         android:id="@+id/productCardFragment"
         android:name="com.mitroshenko.newjob.presentation.ui.card.ProductCardFragment"
@@ -76,5 +86,15 @@
             android:id="@+id/action_confirmationFragment_to_navigation_search"
             app:destination="@id/navigation_search" />
     </fragment>
+    <fragment
+        android:id="@+id/promoFragment"
+        android:name="com.mitroshenko.newjob.presentation.ui.promo.PromoFragment"
+        android:label="fragment_promo"
+        tools:layout="@layout/fragment_promo" />
+    <fragment
+        android:id="@+id/myReviewsFragment"
+        android:name="com.mitroshenko.newjob.presentation.ui.myreviews.myReviewsFragment"
+        android:label="fragment_my_reviews"
+        tools:layout="@layout/fragment_my_reviews" />
 
 </navigation>

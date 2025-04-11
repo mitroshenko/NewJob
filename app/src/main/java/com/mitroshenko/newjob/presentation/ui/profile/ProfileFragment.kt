@@ -7,6 +7,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.navigation.findNavController
 import com.mitroshenko.newjob.R
 import com.mitroshenko.newjob.databinding.FragmentOrderBinding
 import com.mitroshenko.newjob.databinding.FragmentProfileBinding
@@ -21,14 +22,29 @@ class ProfileFragment : Fragment() {
     ): View? {
         _binding = FragmentProfileBinding.inflate(inflater, container, false)
         val root: View = binding.root
-        binding.btnExit.setOnClickListener{
-            val intent = Intent(requireContext(), StartActivity::class.java)
-            startActivity(intent)
-            activity?.finish()
+        binding.apply {
+            btnExit.setOnClickListener {
+                val intent = Intent(requireContext(), StartActivity::class.java)
+                startActivity(intent)
+                activity?.finish()
+            }
+            btnPromo.setOnClickListener {
+                view?.findNavController()!!
+                    .navigate(R.id.action_navigation_profile_to_promoFragment)
+            }
+            btnChat.setOnClickListener {
+                view?.findNavController()!!
+                    .navigate(R.id.action_navigation_profile_to_navigation_messages)
+            }
+            btnReviews.setOnClickListener {
+                view?.findNavController()!!
+                    .navigate(R.id.action_navigation_profile_to_myReviewsFragment)
+            }
 
         }
         return root
     }
+
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null

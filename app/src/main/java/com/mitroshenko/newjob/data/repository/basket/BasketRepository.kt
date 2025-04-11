@@ -2,31 +2,31 @@ package com.mitroshenko.newjob.data.repository.basket
 
 import android.content.Context
 import androidx.annotation.WorkerThread
-import com.mitroshenko.newjob.data.database.ProductRoomDatabase
+import com.mitroshenko.newjob.data.database.BasketRoomDatabase
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.SupervisorJob
 import kotlinx.coroutines.flow.Flow
 
-class BasketRepository(private val dao: Dao) {
-    val allProducts: Flow<List<Entity>> = dao.getAlphabetizedProducts()
+class BasketRepository(private val basketDao: BasketDao) {
+    val allProducts: Flow<List<BasketEntity>> = basketDao.getAlphabetizedProducts()
 
     @WorkerThread
-    suspend fun insert(prod: Entity) {
-        dao.insert(prod)
+    suspend fun insert(basketEntity: BasketEntity) {
+        basketDao.insert(basketEntity)
     }
 
-    suspend fun delete(prod: Entity) {
-        dao.delete(prod)
+    suspend fun delete(basketEntity: BasketEntity) {
+        basketDao.delete(basketEntity)
     }
 
-    suspend fun update(prod: Entity) {
-        dao.update(prod)
+    suspend fun update(basketEntity: BasketEntity) {
+        basketDao.update(basketEntity)
     }
 
-    private var prodDatabase: ProductRoomDatabase? = null
+    private var prodDatabase: BasketRoomDatabase? = null
 
-    private fun initialiseDB(context: Context): ProductRoomDatabase? {
+    private fun initialiseDB(context: Context): BasketRoomDatabase? {
         val applicationScope = CoroutineScope(SupervisorJob())
-        return ProductRoomDatabase.getDatabase(context, applicationScope)
+        return BasketRoomDatabase.getDatabase(context, applicationScope)
     }
 }

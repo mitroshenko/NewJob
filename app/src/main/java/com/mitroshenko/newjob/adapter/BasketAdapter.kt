@@ -8,35 +8,35 @@ import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.mitroshenko.newjob.R
-import com.mitroshenko.newjob.data.repository.basket.Entity
+import com.mitroshenko.newjob.data.repository.basket.BasketEntity
 import com.mitroshenko.newjob.databinding.BasketRcviewBinding
 
 
-class BasketAdapter(private val onClick: (Entity) -> Unit): ListAdapter<Entity, BasketAdapter.Holder>(Comparator()){
-    class Holder(view: View, val onClick: (Entity) -> Unit): RecyclerView.ViewHolder(view){
+class BasketAdapter(private val onClick: (BasketEntity) -> Unit): ListAdapter<BasketEntity, BasketAdapter.Holder>(Comparator()){
+    class Holder(view: View, val onClick: (BasketEntity) -> Unit): RecyclerView.ViewHolder(view){
         private val binding = BasketRcviewBinding.bind(view)
-        fun bind(entity: Entity) = with(binding) {
-            itemView.setOnClickListener { onClick(entity) }
-            tvTitle.text = entity.title
-            tvPrice.text = entity.price
-            tvBrand.text = entity.brand
+        fun bind(basketEntity: BasketEntity) = with(binding) {
+            itemView.setOnClickListener { onClick(basketEntity) }
+            tvTitle.text = basketEntity.title
+            tvPrice.text = basketEntity.price
+            tvBrand.text = basketEntity.brand
             Glide.with(binding.root.context)
-                .load(entity.images)
-                .into(ivFavourite)
+                .load(basketEntity.images)
+                .into(ivBasket)
         }
         companion object {
-            fun create(parent: ViewGroup, onClick: (Entity) -> Unit): Holder {
+            fun create(parent: ViewGroup, onClick: (BasketEntity) -> Unit): Holder {
                 val view: View = LayoutInflater.from(parent.context)
                     .inflate(R.layout.basket_rcview, parent, false)
                 return Holder(view, onClick)
             }
         }
     }
-    class Comparator: DiffUtil.ItemCallback<Entity>(){
-        override fun areItemsTheSame(oldItem: Entity, newItem: Entity): Boolean {
+    class Comparator: DiffUtil.ItemCallback<BasketEntity>(){
+        override fun areItemsTheSame(oldItem: BasketEntity, newItem: BasketEntity): Boolean {
             return oldItem.id == newItem.id
         }
-        override fun areContentsTheSame(oldItem: Entity, newItem: Entity): Boolean {
+        override fun areContentsTheSame(oldItem: BasketEntity, newItem: BasketEntity): Boolean {
             return oldItem == newItem
         }
     }

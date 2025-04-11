@@ -7,7 +7,6 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
-import androidx.lifecycle.LifecycleOwner
 import androidx.navigation.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.bumptech.glide.Glide
@@ -15,7 +14,7 @@ import com.mitroshenko.newjob.R
 import com.mitroshenko.newjob.adapter.ReviewsAdapter
 import com.mitroshenko.newjob.databinding.FragmentProductCardBinding
 import com.mitroshenko.newjob.data.model.IdCard.IdCardModel
-import com.mitroshenko.newjob.data.repository.basket.Entity
+import com.mitroshenko.newjob.data.repository.basket.BasketEntity
 import com.mitroshenko.newjob.data.repository.favourites.FavouriteEntity
 
 class ProductCardFragment : Fragment() {
@@ -56,34 +55,18 @@ class ProductCardFragment : Fragment() {
                 revadapter.submitList(it)
             }
         }
-        idCardModel.idCard.observe(activity as LifecycleOwner) {
+        idCardModel.idCard.observe(viewLifecycleOwner) {
             val idCard = it
             viewModel.apply {
                 loadReviews(idCard)
                 loadCard(idCard)
-                binding.icFav2.setOnClickListener{
-                    viewModel.insertFavourite(
-                        favouriteEntity = FavouriteEntity(
-                            title = binding.tvTitle.text.toString(),
-                            brand = binding.tvBrand.text.toString(),
-                            rating = binding.tvRaiting.text.toString(),
-                            price = binding.tvPrice2.text.toString(),
-                            images = binding.ivFoto.toString(),
-                            idCardProd = idCard
-                        )
-                    )
-                }
-                binding.btnAdd.setOnClickListener{
-                    viewModel.insertBasket(
-                        prod = Entity(
-                            title = binding.tvTitle.text.toString(),
-                            brand = binding.tvBrand.text.toString(),
-                            rating = binding.tvRaiting.text.toString(),
-                            price = binding.tvPrice2.text.toString(),
-                            images = binding.ivFoto.toString(),
-                            idCardProd = idCard
-                        )
-                    )
+                binding.apply {
+                    icFav2.setOnClickListener{
+                        viewModel.insertFavourite(idCard)
+                    }
+                    btnAdd.setOnClickListener{
+                        viewModel.insertBasket(idCard)
+                    }
                 }
             }
         }

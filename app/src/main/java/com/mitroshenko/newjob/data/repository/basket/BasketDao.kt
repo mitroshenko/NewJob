@@ -9,19 +9,19 @@ import androidx.room.Update
 import kotlinx.coroutines.flow.Flow
 
 @Dao
-interface Dao {
+interface BasketDao {
     @Query("SELECT * FROM my_table")
-    fun getAlphabetizedProducts(): Flow<List<Entity>>
+    fun getAlphabetizedProducts(): Flow<List<BasketEntity>>
 
     @Insert(onConflict = OnConflictStrategy.IGNORE)
-    suspend fun insert(prod: Entity)
+    suspend fun insert(prod: BasketEntity)
 
     @Delete
-    suspend fun delete(prod: Entity)
+    suspend fun delete(prod: BasketEntity)
 
     @Query("DELETE FROM my_table")
     suspend fun deleteAll()
 
     @Update
-    suspend fun update(prod: Entity)
+    suspend fun update(prod: BasketEntity)
 }

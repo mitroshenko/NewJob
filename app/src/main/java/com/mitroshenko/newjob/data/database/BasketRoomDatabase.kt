@@ -5,32 +5,32 @@ import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
 import androidx.sqlite.db.SupportSQLiteDatabase
-import com.mitroshenko.newjob.data.repository.basket.Dao
-import com.mitroshenko.newjob.data.repository.basket.Entity
+import com.mitroshenko.newjob.data.repository.basket.BasketDao
+import com.mitroshenko.newjob.data.repository.basket.BasketEntity
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
-@Database(entities = [Entity::class], version = 1)
-abstract class ProductRoomDatabase : RoomDatabase() {
+@Database(entities = [BasketEntity::class], version = 1)
+abstract class BasketRoomDatabase : RoomDatabase() {
 
-    abstract fun dao(): Dao
+    abstract fun dao(): BasketDao
 
     companion object {
 
         private const val DATABASE_NAME = "ProductDatabase"
 
         @Volatile
-        private var INSTANCE: ProductRoomDatabase? = null
+        private var INSTANCE: BasketRoomDatabase? = null
 
         fun getDatabase(
             context: Context,
             scope: CoroutineScope
-        ): ProductRoomDatabase {
+        ): BasketRoomDatabase {
             return INSTANCE ?: synchronized(this) {
                 val instance = Room.databaseBuilder(
                     context.applicationContext,
-                    ProductRoomDatabase::class.java,
+                    BasketRoomDatabase::class.java,
                     "note_database"
                 )
                     .fallbackToDestructiveMigration()
@@ -53,8 +53,8 @@ abstract class ProductRoomDatabase : RoomDatabase() {
                 }
             }
         }
-        suspend fun populateDatabase(dao: Dao) {
-            dao.deleteAll()
+        suspend fun populateDatabase(basketDao: BasketDao) {
+            basketDao.deleteAll()
         }
     }
 }
